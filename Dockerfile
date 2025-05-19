@@ -8,8 +8,7 @@ ENV TZ=Europe/London
 RUN apk update && apk add --no-cache openssh openssh-keygen shadow sudo
 
 # Configure SSH server
-RUN mkdir -p /run/sshd
-RUN sed -i 's@#PermitRootLogin prohibit-password@PermitRootLogin no@' /etc/ssh/sshd_config
+RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
 # Generate SSH host keys
 RUN ssh-keygen -A

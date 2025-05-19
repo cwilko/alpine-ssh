@@ -23,8 +23,6 @@ adduser -u $USER_ID -G "$USERNAME" -s /bin/sh -D "$USERNAME"
 # Set the user's password
 echo "$USERNAME:$PASSWORD" | chpasswd
 
-# Add the user to the sudo group
-addgroup "$USERNAME" sudo
 # Grant sudo privileges, requiring a password
 echo "%$USERNAME ALL=(ALL) ALL" >> /etc/sudoers
 
@@ -34,5 +32,5 @@ sed -i "s/^#Port 22/Port $SSH_PORT/" /etc/ssh/sshd_config
 # Start the SSH server in the background
 /usr/sbin/sshd -D &
 
-# Keep the container running
-tail -f /var/log/messages
+# Keep the container running indefinitely
+sleep infinity
