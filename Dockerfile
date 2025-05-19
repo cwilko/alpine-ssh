@@ -7,10 +7,6 @@ ENV TZ=Europe/London
 # Update package lists and install necessary software
 RUN apk update && apk add --no-cache openssh openssh-keygen shadow sudo libstdc++
 
-# Configure SSH server
-RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
-RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
-
 # Generate SSH host keys
 RUN ssh-keygen -A
 

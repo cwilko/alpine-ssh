@@ -26,6 +26,30 @@ echo "$USERNAME:$PASSWORD" | chpasswd
 # Grant sudo privileges, requiring a password
 echo "%$USERNAME ALL=(ALL) ALL" >> /etc/sudoers
 
+# Disable root login via SSH
+sed -i 's/^PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
+echo "Root login via SSH has been disabled."
+
+mkdir /development
+chown 1000:1000 /development
+
+# Configure SSH key-based authentication if a public key is provided
+if [ -n "$PUBLIC_KEY" ]; then
+  mkdir -p /home/"$USERNAME"/.ssh
+  chmod 700 /home/"$USERNAME"/.ssh
+  echo "$PUBLIC_KEY" >> /home/"$USERNAME"/.ssh/authorized_keys
+  chmod 600 /home/"$USERNAME"/.ssh/authorized_keys
+  chown -R "$USERNAME":"$USERNAME" /home/"$USERNAME"/.ssh
+  echo "Public key added for user '$USERNAME'."
+
+  # Disable password authentication in sshd_config
+  sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+  echo "Password authentication has been disabled."
+else
+  sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+  echo "Password authentication is enabled."
+fi
+
 # Configure SSH port in sshd_config
 sed -i "s/^#Port 22/Port $SSH_PORT/" /etc/ssh/sshd_config
 sed -i "s/^AllowTcpForwarding no/AllowTcpForwarding yes/" /etc/ssh/sshd_config
