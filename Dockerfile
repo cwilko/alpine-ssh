@@ -5,7 +5,7 @@ FROM alpine:latest
 ENV TZ=Europe/London 
 
 # Update package lists and install necessary software
-RUN apk update && apk add --no-cache openssh openssh-keygen shadow sudo
+RUN apk update && apk add --no-cache openssh openssh-keygen shadow sudo libc++
 
 # Configure SSH server
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
