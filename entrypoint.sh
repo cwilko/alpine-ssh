@@ -30,9 +30,6 @@ echo "%$USERNAME ALL=(ALL) ALL" >> /etc/sudoers
 sed -i 's/^PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
 echo "Root login via SSH has been disabled."
 
-mkdir /development
-chown 1000:1000 /development
-
 # Configure SSH key-based authentication if a public key is provided
 if [ -n "$PUBLIC_KEY" ]; then
   mkdir -p /home/"$USERNAME"/.ssh
