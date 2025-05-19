@@ -28,6 +28,8 @@ echo "%$USERNAME ALL=(ALL) ALL" >> /etc/sudoers
 
 # Configure SSH port in sshd_config
 sed -i "s/^#Port 22/Port $SSH_PORT/" /etc/ssh/sshd_config
+sed -i "s/^#AllowTcpForwarding no/AllowTcpForwarding yes/" /etc/ssh/sshd_config
+
 
 # Start the SSH server in the background
 /usr/sbin/sshd -D &
