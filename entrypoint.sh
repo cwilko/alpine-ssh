@@ -15,8 +15,8 @@ PASSWORD="${PASSWORD:-$DEFAULT_PASSWORD}"
 SSH_PORT="${SSH_PORT:-$DEFAULT_SSH_PORT}"
 
 # Add the specified group and user
-GROUP_ID=1000
-USER_ID=1000
+GROUP_ID=1003
+USER_ID=1003
 addgroup -g $GROUP_ID "$USERNAME"
 adduser -u $USER_ID -G "$USERNAME" -s /bin/sh -D "$USERNAME"
 

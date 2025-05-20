@@ -11,7 +11,7 @@ RUN apk update && apk add --no-cache openssh openssh-keygen shadow sudo libstdc+
 RUN ssh-keygen -A
 
 RUN mkdir /development
-RUN chown 1000:1000 /development
+RUN chown 1003:1003 /development
 
 # Copy the user setup script into the image
 COPY entrypoint.sh /entrypoint.sh
