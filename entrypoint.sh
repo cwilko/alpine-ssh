@@ -40,7 +40,7 @@ if [ -n "$PUBLIC_KEY" ]; then
   echo "Public key added for user '$USERNAME'."
 
   # Disable password authentication in sshd_config
-  sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+  sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
   echo "Password authentication has been disabled."
 else
   sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
